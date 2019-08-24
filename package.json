@@ -1,0 +1,24 @@
+{
+  "name": "@hbar.boi/cookiecutter",
+  "version": "1.0.0",
+  "description": "Canvas-based image cropping library",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hbar-boi/cookiecutter.git"
+  },
+  "keywords": [
+    "image",
+    "crop",
+    "canvas"
+  ],
+  "author": "Filippo Miserocchi",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/hbar-boi/cookiecutter/issues"
+  },
+  "homepage": "https://github.com/hbar-boi/cookiecutter#readme"
+}
