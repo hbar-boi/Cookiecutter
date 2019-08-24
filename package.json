@@ -1,5 +1,5 @@
 {
-  "name": "@hbar.boi/cookiecutter",
+  "name": "@hbar-boi/cookiecutter",
   "version": "1.0.0",
   "description": "Canvas-based image cropping library",
   "main": "index.js",
@@ -8,12 +8,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hbar-boi/cookiecutter.git"
+    "url": "git://github.com/hbar-boi/cookiecutter.git"
   },
   "keywords": [
     "image",
-    "crop",
-    "canvas"
+    "photo",
+    "canvas",
+    "crop"
   ],
   "author": "Filippo Miserocchi",
   "license": "GPL-3.0",

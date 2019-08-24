@@ -96,8 +96,12 @@ exports.cookiecutter = function cookiecutter(canvas) {
         self.ctx.fill();
     }
 
-    this.src = function(image) {
+    this.setImage = function(image) {
         self.image.src = image;
+    }
+
+    this.getPoints = function() {
+        return this.points;
     }
 
     return this;
