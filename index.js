@@ -1,15 +1,14 @@
 
 exports.cookiecutter = function cookiecutter(canvas) {
-    var self = this;
 
     this.canvas = canvas;
     this.ctx = this.canvas.get(0).getContext('2d');
 
     this.image = new Image();
     this.image.onload = function() {
-        self.height = canvas.get(0).height = self.image.height;
-        self.width = canvas.get(0).width;
-        self.ctx.drawImage(self.image, 0, 0);
+        this.height = canvas.get(0).height = this.image.height;
+        this.width = canvas.get(0).width;
+        this.ctx.drawImage(this.image, 0, 0);
     }
 
     this.POINT_RADIUS = 3;
@@ -22,86 +21,91 @@ exports.cookiecutter = function cookiecutter(canvas) {
     this.closed = false;
 
     this.canvas.mousedown(function(e) {
-        self.active = null;
+        this.active = null;
         if(e.which == 1) {
-            self.holding = true;
-            self.points.forEach(function(point, i) {
-                if(Math.abs(point[0] - e.offsetX) < self.POINT_RADIUS * 2 &&
-                    Math.abs(point[1] - e.offsetY) < self.POINT_RADIUS * 2) {
-                    if(i == 0 && self.points.length >= 3) {
-                        self.closed = true;
+            this.holding = true;
+            this.points.forEach(function(point, i) {
+                if(Math.abs(point[0] - e.offsetX) < this.POINT_RADIUS * 2 &&
+                    Math.abs(point[1] - e.offsetY) < this.POINT_RADIUS * 2) {
+                    if(i == 0 && this.points.length >= 3) {
+                        this.closed = true;
                     }
-                    self.active = point;
+                    this.active = point;
                 }
             });
-            if(self.active == null && !self.closed) {
-                self.active = self.points[self.points.push([e.offsetX, e.offsetY]) - 1];
+            if(this.active == null && !this.closed) {
+                this.active = this.points[this.points.push([e.offsetX, e.offsetY]) - 1];
             }
-            self.draw();
+            this.draw();
         }
     });
 
     this.canvas.mousemove(function(e) {
-        if(self.holding && self.active != null) {
-            self.active[0] = e.offsetX;
-            self.active[1] = e.offsetY;
-            self.draw();
+        if(this.holding && this.active != null) {
+            this.active[0] = e.offsetX;
+            this.active[1] = e.offsetY;
+            this.draw();
         }
     });
 
     this.canvas.mouseup(function(e) {
-        self.holding = false;
+        this.holding = false;
     });
 
     $(document).keydown(function(e) {
-        if(e.keyCode == 46 && self.active != null) {
-            let index = self.points.indexOf(self.active);
-            self.points.splice(index, 1);
-            self.points.unshift.apply(self.points, self.points.splice(index));
-            self.closed = false;
-            self.draw();
+        if(e.keyCode == 46 && this.active != null) {
+            let index = this.points.indexOf(this.active);
+            this.points.splice(index, 1);
+            this.points.unshift.apply(this.points, this.points.splice(index));
+            this.closed = false;
+            this.draw();
         }
     });
 
     this.draw = function() {
-        self.ctx.clearRect(0, 0, self.width, self.height);
-        self.ctx.drawImage(self.image, 0, 0);
+        this.ctx.clearRect(0, 0, this.width, this.height);
+        this.ctx.drawImage(this.image, 0, 0);
 
-        self.points.forEach(function(point, i) {
-            let size = (self.active == point) ? self.POINT_RADIUS + 2 : self.POINT_RADIUS;
+        this.points.forEach(function(point, i) {
+            let size = (this.active == point) ? this.POINT_RADIUS + 2 : this.POINT_RADIUS;
 
-            self.circle(point, size);
+            this.circle(point, size);
             if(i != 0) {
-                self.line(self.points[i - 1], point);
+                this.line(this.points[i - 1], point);
             }
         });
 
-        if(self.closed) {
-            self.line(self.points[self.points.length - 1], self.points[0]);
+        if(this.closed) {
+            this.line(this.points[this.points.length - 1], this.points[0]);
         }
     }
 
     this.line = function(from, to) {
-        self.ctx.beginPath();
-        self.ctx.moveTo(from[0], from[1]);
-        self.ctx.lineTo(to[0], to[1]);
-        self.ctx.strokeStyle = self.STROKE_STYLE;
-        self.ctx.stroke();
+        this.ctx.beginPath();
+        this.ctx.moveTo(from[0], from[1]);
+        this.ctx.lineTo(to[0], to[1]);
+        this.ctx.strokeStyle = this.STROKE_STYLE;
+        this.ctx.stroke();
     }
 
     this.circle = function(center, radius, style) {
-        self.ctx.beginPath();
-        self.ctx.arc(center[0], center[1], radius, 0, 2 * Math.PI);
-        self.ctx.fillStyle = this.FILL_STYLE;
-        self.ctx.fill();
+        this.ctx.beginPath();
+        this.ctx.arc(center[0], center[1], radius, 0, 2 * Math.PI);
+        this.ctx.fillStyle = this.FILL_STYLE;
+        this.ctx.fill();
     }
 
     this.setImage = function(image) {
-        self.image.src = image;
+        this.image.src = image;
     }
 
     this.getPoints = function() {
         return this.points;
+    }
+
+    this.reset = function() {
+        this.points = [];
+        this.ctx.clearRect(0, 0, this.width, this.height);
     }
 
     return this;

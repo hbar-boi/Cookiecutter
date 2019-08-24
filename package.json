@@ -1,6 +1,6 @@
 {
   "name": "@hbar-boi/cookiecutter",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Canvas-based image cropping library",
   "main": "index.js",
   "scripts": {
