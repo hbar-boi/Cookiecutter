@@ -7,8 +7,8 @@ exports.cookiecutter = function cookiecutter(canvas) {
 
     this.image = new Image();
     this.image.onload = function() {
-        self.height = canvas.get(0).height = self.image.height;
-        self.width = canvas.get(0).width;
+        self.height = self.canvas.get(0).height = self.image.height;
+        self.width = self.canvas.get(0).width;
         self.ctx.drawImage(self.image, 0, 0);
     }
 
